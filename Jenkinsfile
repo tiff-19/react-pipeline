@@ -56,5 +56,11 @@ pipeline {
                 }
             }
         }
+        stage('Clean up image') {
+            steps {
+                sh 'docker rmi tiff19/reactapp-test'
+                
+            }
+        }
     }
 }
