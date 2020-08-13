@@ -29,10 +29,10 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('Test docker image') {
+        stage('Build docker image') {
             steps{
-                sh 'docker run -d --rm --name testImages -p 80:80 hisbu/webapps-test'
-                input message: 'Finished test image? (Click "Proceed" to Continue'
+                script {
+                	app = docker.build("tiff19/reactapp-test")
             }
         }
     }
