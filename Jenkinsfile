@@ -59,7 +59,17 @@ pipeline {
         stage('Clean up image') {
             steps {
                 sh 'docker rmi tiff19/reactapp-test'
-                
+
+            }
+        }
+        stage('Deployment to Production') {
+            steps {
+                milestone(1)
+                kubernetesDeploy(
+                    kubeConfigId: 'kubeconfig'
+                    config: 'reactapp-deployment.yml'
+                    enableConfigSubstitution: true
+                )
             }
         }
     }
