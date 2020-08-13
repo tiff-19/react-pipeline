@@ -67,7 +67,7 @@ pipeline {
                 milestone(1)
                 kubernetesDeploy(
                     kubeConfigId: 'kubeconfig'
-                    config: 'reactapp-deployment.yml'
+                    configs: 'reactapp-deployment.yml'
                     enableConfigSubstitution: true
                 )
             }
