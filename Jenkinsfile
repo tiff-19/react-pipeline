@@ -33,6 +33,7 @@ pipeline {
             steps{
                 script {
                 	app = docker.build("tiff19/reactapp-test")
+                }
             }
         }
     }
