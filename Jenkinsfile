@@ -47,5 +47,14 @@ pipeline {
                 sh 'docker stop testImages'
             }
         }
+        stage('Push image to registry') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
+                        app.push()
+                    }
+                }
+            }
+        }
     }
 }
