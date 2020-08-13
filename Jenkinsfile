@@ -6,7 +6,8 @@ pipeline {
     //         args '-v $HOME/.m2:/root/.m2'
     //     }
     // }
-    agent any
+    // agent any
+    agent {label 'react-app'}
     environment {
         CI = 'true'
     }
