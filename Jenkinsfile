@@ -65,11 +65,11 @@ pipeline {
         stage('Deployment to Production') {
             steps {
                 milestone(1)
-                kubernetesDeploy(
+                kubernetesDeploy {
                     kubeConfigId: 'kubeconfig'
                     configs: 'reactapp-deployment.yml'
                     enableConfigSubstitution: true
-                )
+                }
             }
         }
     }
