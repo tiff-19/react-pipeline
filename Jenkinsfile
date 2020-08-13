@@ -36,5 +36,16 @@ pipeline {
                 }
             }
         }
+        stage('Test docker image') {
+            steps {
+                sh 'docker run -d --rm --name testImages -p 8081:80 tiff19/reactapp-test'
+                input message: "Finished test image? (Click proceed to continue)"
+            }
+        }
+        stage('Clean up docker test') {
+            steps {
+                sh 'docker stop testImages'
+            }
+        }
     }
 }
