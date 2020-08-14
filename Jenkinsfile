@@ -62,15 +62,23 @@ pipeline {
 
             }
         }
-        stage('Deployment to Production') {
+        stage('Deploy to Kubernetes') {
             steps {
-                milestone(1)
-                kubernetesDeploy (
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'reactapp-deployment.yml',
-                    enableConfigSubstitution: true
-                )
+                sshagent(['kubeAccess']) {
+                    sh "scp -o StricHostKeyChecking=no reactapp-deployment.yml tiffany@34.101.128.202:/home/tiffany/reactapp/"
+                    sh "ssh tiffany@34.101.128.202 sudo kubectl apply -f reactapp/."
+                }
             }
         }
+        // stage('Deployment to Production') {
+        //     steps {
+        //         milestone(1)
+        //         kubernetesDeploy (
+        //             kubeconfigId: 'kubeconfig',
+        //             configs: 'reactapp-deployment.yml',
+        //             enableConfigSubstitution: true
+        //         )
+        //     }
+        // }
     }
 }
